@@ -25,8 +25,10 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useController } from "../../../store/auth";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import HomeIcon from "@mui/icons-material/Home";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import StorefrontIcon from "@mui/icons-material/Storefront";
+import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 const drawerWidth = 240;
@@ -176,15 +178,25 @@ export default function MiniDrawer({
         <List>
           {(() => {
             const items = [
-              { text: "Home", to: "/app" },
-              { text: "Dashboard", to: "/app/dashboard" },
-              { text: "Perfil", to: "/app/profile" },
+              { text: "Home", to: "/app", icon: <HomeIcon /> },
+              {
+                text: "Dashboard",
+                to: "/app/dashboard",
+                icon: <DashboardIcon />,
+              },
+              {
+                text: "Produtos",
+                to: "/app/products",
+                icon: <StorefrontIcon />,
+              },
+              { text: "Perfil", to: "/app/profile", icon: <PersonIcon /> },
             ];
-            return items.map((item, index) => {
+            return items.map((item) => {
+              const path = location.pathname;
               const selected =
-                item.to === "/"
-                  ? location.pathname === "/"
-                  : location.pathname.startsWith(item.to);
+                item.to === "/app"
+                  ? path === "/app"
+                  : path === item.to || path.startsWith(item.to + "/");
               return (
                 <ListItem
                   key={item.text}
@@ -239,7 +251,7 @@ export default function MiniDrawer({
                           : {},
                       ]}
                     >
-                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                      {item.icon}
                     </ListItemIcon>
                     <ListItemText
                       primary={item.text}
