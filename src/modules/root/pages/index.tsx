@@ -31,6 +31,16 @@ const NotFound = lazyImport(
   "default",
 );
 
+const PaymentSuccess = lazyImport(
+  () => import("./payment/success"),
+  "PaymentSuccessView",
+);
+
+const ProductsProtected = lazyImport(
+  () => import("./protected/products/products.view"),
+  "ProductsView",
+);
+
 const withSuspense = (Component: React.ComponentType) => (
   <Suspense fallback={<FallbackLoading />}>
     <Component />
@@ -56,6 +66,11 @@ export const routes: RouteObject[] = [
     errorElement: <ErrorElement />,
   },
   {
+    path: "/payment/success",
+    element: withSuspense(PaymentSuccess),
+    errorElement: <ErrorElement />,
+  },
+  {
     path: "*",
     element: withSuspense(NotFound),
     errorElement: <ErrorElement />,
@@ -74,8 +89,16 @@ export const routes: RouteObject[] = [
         element: withSuspense(DashboardProtected),
       },
       {
+        path: "products",
+        element: withSuspense(ProductsProtected),
+      },
+      {
         path: "profile",
         element: withSuspense(ProfileProtected),
+      },
+      {
+        path: "payment/success",
+        element: withSuspense(PaymentSuccess),
       },
     ],
   },
