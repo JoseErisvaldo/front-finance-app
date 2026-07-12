@@ -5,6 +5,7 @@ import {
   type CSSObject,
   type Theme,
 } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar, {
@@ -121,6 +122,7 @@ export default function MiniDrawer({
   children?: React.ReactNode;
 }) {
   const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -140,10 +142,28 @@ export default function MiniDrawer({
     setOpen(false);
     navigate("/login", { replace: true });
   };
+
+  const menuItems = [
+    { text: "Home", to: "/app", icon: <HomeIcon /> },
+    {
+      text: "Dashboard",
+      to: "/app/dashboard",
+      icon: <DashboardIcon />,
+    },
+    {
+      text: "Assinaturas",
+      to: "/app/subscriptions",
+      icon: <StorefrontIcon />,
+    },
+    { text: "Perfil", to: "/app/profile", icon: <PersonIcon /> },
+  ];
+
+  const isExpanded = isDesktop ? open : true;
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={isDesktop && open}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -154,7 +174,7 @@ export default function MiniDrawer({
               {
                 marginRight: 5,
               },
-              open && { display: "none" },
+              isDesktop && open && { display: "none" },
             ]}
           >
             <MenuIcon />
@@ -164,39 +184,26 @@ export default function MiniDrawer({
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          {(() => {
-            const items = [
-              { text: "Home", to: "/app", icon: <HomeIcon /> },
-              {
-                text: "Dashboard",
-                to: "/app/dashboard",
-                icon: <DashboardIcon />,
-              },
-              {
-                text: "Assinaturas",
-                to: "/app/subscriptions",
-                icon: <StorefrontIcon />,
-              },
-              { text: "Perfil", to: "/app/profile", icon: <PersonIcon /> },
-            ];
-            return items.map((item) => {
+      {isDesktop ? (
+        <Drawer variant="permanent" open={open}>
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === "rtl" ? (
+                <ChevronRightIcon />
+              ) : (
+                <ChevronLeftIcon />
+              )}
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+          <List>
+            {menuItems.map((item) => {
               const path = location.pathname;
               const selected =
                 item.to === "/app"
                   ? path === "/app"
                   : path === item.to || path.startsWith(item.to + "/");
+
               return (
                 <ListItem
                   key={item.text}
@@ -207,12 +214,15 @@ export default function MiniDrawer({
                     component={Link}
                     to={item.to}
                     selected={selected}
+                    onClick={() => {
+                      if (!isDesktop) handleDrawerClose();
+                    }}
                     sx={[
                       {
                         minHeight: 48,
                         px: 2.5,
                       },
-                      open
+                      isExpanded
                         ? {
                             justifyContent: "initial",
                           }
@@ -237,7 +247,7 @@ export default function MiniDrawer({
                           minWidth: 0,
                           justifyContent: "center",
                         },
-                        open
+                        isExpanded
                           ? {
                               mr: 3,
                             }
@@ -256,7 +266,7 @@ export default function MiniDrawer({
                     <ListItemText
                       primary={item.text}
                       sx={[
-                        open
+                        isExpanded
                           ? {
                               opacity: 1,
                             }
@@ -268,61 +278,162 @@ export default function MiniDrawer({
                   </ListItemButton>
                 </ListItem>
               );
-            });
-          })()}
-        </List>
-        <Divider />
-        <List>
-          <ListItem disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              onClick={onLogout}
-              sx={[
-                {
-                  minHeight: 48,
-                  px: 2.5,
-                },
-                open
-                  ? {
-                      justifyContent: "initial",
-                    }
-                  : {
-                      justifyContent: "center",
-                    },
-              ]}
-            >
-              <ListItemIcon
+            })}
+          </List>
+          <Divider />
+          <List>
+            <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItemButton
+                onClick={onLogout}
                 sx={[
                   {
-                    minWidth: 0,
-                    justifyContent: "center",
+                    minHeight: 48,
+                    px: 2.5,
                   },
-                  open
+                  isExpanded
                     ? {
-                        mr: 3,
+                        justifyContent: "initial",
                       }
                     : {
-                        mr: "auto",
+                        justifyContent: "center",
                       },
                 ]}
               >
-                <LogoutIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary="Sair"
-                sx={[
-                  open
-                    ? {
-                        opacity: 1,
-                      }
-                    : {
-                        opacity: 0,
+                <ListItemIcon
+                  sx={[
+                    {
+                      minWidth: 0,
+                      justifyContent: "center",
+                    },
+                    isExpanded
+                      ? {
+                          mr: 3,
+                        }
+                      : {
+                          mr: "auto",
+                        },
+                  ]}
+                >
+                  <LogoutIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Sair"
+                  sx={[
+                    isExpanded
+                      ? {
+                          opacity: 1,
+                        }
+                      : {
+                          opacity: 0,
+                        },
+                  ]}
+                />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </Drawer>
+      ) : (
+        <MuiDrawer
+          variant="temporary"
+          open={open}
+          onClose={handleDrawerClose}
+          ModalProps={{ keepMounted: true }}
+          sx={{
+            "& .MuiDrawer-paper": {
+              width: drawerWidth,
+              boxSizing: "border-box",
+            },
+          }}
+        >
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === "rtl" ? (
+                <ChevronRightIcon />
+              ) : (
+                <ChevronLeftIcon />
+              )}
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+          <List>
+            {menuItems.map((item) => {
+              const path = location.pathname;
+              const selected =
+                item.to === "/app"
+                  ? path === "/app"
+                  : path === item.to || path.startsWith(item.to + "/");
+
+              return (
+                <ListItem
+                  key={item.text}
+                  disablePadding
+                  sx={{ display: "block" }}
+                >
+                  <ListItemButton
+                    component={Link}
+                    to={item.to}
+                    selected={selected}
+                    onClick={handleDrawerClose}
+                    sx={[
+                      {
+                        minHeight: 48,
+                        px: 2.5,
                       },
-                ]}
-              />
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </Drawer>
+                      {
+                        justifyContent: "initial",
+                      },
+                      {
+                        "&.Mui-selected": {
+                          backgroundColor: (theme) =>
+                            theme.palette.action.selected,
+                          "&:hover": {
+                            backgroundColor: (theme) =>
+                              theme.palette.action.selected,
+                          },
+                        },
+                      },
+                    ]}
+                  >
+                    <ListItemIcon
+                      sx={[
+                        {
+                          minWidth: 0,
+                          justifyContent: "center",
+                          mr: 3,
+                        },
+                        selected
+                          ? {
+                              color: "primary.main",
+                            }
+                          : {},
+                      ]}
+                    >
+                      {item.icon}
+                    </ListItemIcon>
+                    <ListItemText primary={item.text} sx={{ opacity: 1 }} />
+                  </ListItemButton>
+                </ListItem>
+              );
+            })}
+          </List>
+          <Divider />
+          <List>
+            <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItemButton
+                onClick={onLogout}
+                sx={{ minHeight: 48, px: 2.5, justifyContent: "initial" }}
+              >
+                <ListItemIcon
+                  sx={{ minWidth: 0, justifyContent: "center", mr: 3 }}
+                >
+                  <LogoutIcon />
+                </ListItemIcon>
+                <ListItemText primary="Sair" sx={{ opacity: 1 }} />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </MuiDrawer>
+      )}
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         {children}
