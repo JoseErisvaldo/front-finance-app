@@ -21,6 +21,7 @@ export const PriceCard = ({
         borderRadius: 2,
         border: "1px solid",
         borderColor: "divider",
+        bgcolor: "background.paper",
         minHeight: 160,
         display: "flex",
         flexDirection: "column",
@@ -60,7 +61,7 @@ export const PriceCard = ({
         <Button
           variant="contained"
           size="medium"
-          sx={{ width: { xs: "100%", sm: "auto" } }}
+          sx={{ width: { xs: "100%", sm: "auto" }, borderRadius: 2 }}
           onClick={() => checkoutStripe(price.id)}
           disabled={isPending}
         >

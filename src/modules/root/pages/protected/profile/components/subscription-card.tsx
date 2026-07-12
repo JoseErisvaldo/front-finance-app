@@ -85,8 +85,6 @@ export function SubscriptionCard({
                   height: "100%",
                   display: "flex",
                   flexDirection: "column",
-                  transition: "border-color 0.2s",
-                  "&:hover": { borderColor: "text.primary" },
                 }}
               >
                 <CardContent sx={{ flexGrow: 1 }}>

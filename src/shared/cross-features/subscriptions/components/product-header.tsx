@@ -8,19 +8,21 @@ export const ProductHeader = ({ product }: { product: Product }) => {
         display: "flex",
         flexDirection: { xs: "column", md: "row" },
         gap: 2,
-        alignItems: "center",
-        minHeight: { md: 240 },
+        alignItems: "stretch",
       }}
     >
       {product.image && (
         <Box
           sx={{
-            width: { xs: "100%", md: 360 },
-            height: { xs: 180, md: 240 },
+            width: { xs: "100%", md: 300 },
+            height: { xs: 170, md: 200 },
             overflow: "hidden",
             display: "flex",
             alignItems: "center",
             flexShrink: 0,
+            borderRadius: 2,
+            border: "1px solid",
+            borderColor: "divider",
           }}
         >
           <img
@@ -36,8 +38,18 @@ export const ProductHeader = ({ product }: { product: Product }) => {
         </Box>
       )}
 
-      <Box sx={{ flex: 1 }}>
-        <Stack sx={{ flexDirection: "row", gap: 1, alignItems: "center" }}>
+      <Box
+        sx={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column" }}
+      >
+        <Stack
+          direction="row"
+          spacing={1}
+          sx={{
+            alignItems: "center",
+            justifyContent: "space-between",
+            mb: 0.5,
+          }}
+        >
           <Typography variant="h6" sx={{ fontWeight: 600 }}>
             {product.name}
           </Typography>
