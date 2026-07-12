@@ -36,9 +36,9 @@ const PaymentSuccess = lazyImport(
   "PaymentSuccessView",
 );
 
-const ProductsProtected = lazyImport(
-  () => import("./protected/products/products.view"),
-  "ProductsView",
+const SubscriptionsProtected = lazyImport(
+  () => import("./protected/subscriptions"),
+  "SubscriptionsView",
 );
 
 const withSuspense = (Component: React.ComponentType) => (
@@ -89,8 +89,8 @@ export const routes: RouteObject[] = [
         element: withSuspense(DashboardProtected),
       },
       {
-        path: "products",
-        element: withSuspense(ProductsProtected),
+        path: "subscriptions",
+        element: withSuspense(SubscriptionsProtected),
       },
       {
         path: "profile",

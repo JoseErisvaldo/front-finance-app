@@ -185,8 +185,8 @@ export default function MiniDrawer({
                 icon: <DashboardIcon />,
               },
               {
-                text: "Produtos",
-                to: "/app/products",
+                text: "Assinaturas",
+                to: "/app/subscriptions",
                 icon: <StorefrontIcon />,
               },
               { text: "Perfil", to: "/app/profile", icon: <PersonIcon /> },

@@ -25,8 +25,12 @@ export const PaymentSuccessView = () => {
             Voltar para o início
           </Button>
 
-          <Button component={RouterLink} to="/app/products" variant="contained">
-            Ver meus produtos
+          <Button
+            component={RouterLink}
+            to="/app/subscriptions"
+            variant="contained"
+          >
+            Ver minhas assinaturas
           </Button>
         </Stack>
       </Container>

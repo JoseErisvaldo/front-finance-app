@@ -1,12 +1,12 @@
 import { Box, Divider, Typography } from "@mui/material";
-import type { Product } from "../types/products.types";
+import type { Product } from "../types/subscriptions.types";
 import { getIntervalSingular, getIntervalPlural } from "../utils/intervals";
 import { ProductHeader } from "./product-header";
 import { PriceCard } from "./price-card";
 
 type Props = { product: Product };
 
-export const ProductsContent = ({ product }: Props) => {
+export const SubscriptionsContent = ({ product }: Props) => {
   const recurring = product.prices.filter((p) => p.type === "recurring");
   const oneTime = product.prices.filter((p) => p.type === "one_time");
 

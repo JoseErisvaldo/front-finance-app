@@ -1,9 +1,9 @@
 import { Container, Grid, Card, CardContent } from "@mui/material";
-import { useProductsQueries } from "./queries/use-products.queries";
-import { ProductsContent } from "./components/products-content";
+import { useSubscriptionsQueries } from "./queries/use-subscriptions.queries";
+import { SubscriptionsContent } from "./components/subscriptions-content";
 
-export const Products = () => {
-  const { data } = useProductsQueries();
+export const Subscriptions = () => {
+  const { data } = useSubscriptionsQueries();
 
   return (
     <Container sx={{ py: 4 }}>
@@ -20,7 +20,7 @@ export const Products = () => {
               }}
             >
               <CardContent>
-                <ProductsContent product={product} />
+                <SubscriptionsContent product={product} />
               </CardContent>
             </Card>
           </Grid>

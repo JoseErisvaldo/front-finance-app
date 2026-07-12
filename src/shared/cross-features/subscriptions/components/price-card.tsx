@@ -1,5 +1,5 @@
 import { Box, Typography, Stack, Button } from "@mui/material";
-import type { Price } from "../types/products.types";
+import type { Price } from "../types/subscriptions.types";
 import { formatPrice } from "../../../helpers/format-price/format-price";
 import { useCheckoutStripeMutation } from "../mutations/checkout-stripe.mutations";
 

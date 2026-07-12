@@ -12,5 +12,7 @@ export const INTERVAL_PLURAL: Record<string, string> = {
   day: "dias",
 };
 
-export const getIntervalSingular = (interval: string) => INTERVAL_SINGULAR[interval] ?? interval;
-export const getIntervalPlural = (interval: string) => INTERVAL_PLURAL[interval] ?? `${getIntervalSingular(interval)}s`;
+export const getIntervalSingular = (interval: string) =>
+  INTERVAL_SINGULAR[interval] ?? interval;
+export const getIntervalPlural = (interval: string) =>
+  INTERVAL_PLURAL[interval] ?? `${getIntervalSingular(interval)}s`;

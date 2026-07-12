@@ -1,5 +1,5 @@
 import { Box, Typography, Chip, Stack } from "@mui/material";
-import type { Product } from "../types/products.types";
+import type { Product } from "../types/subscriptions.types";
 
 export const ProductHeader = ({ product }: { product: Product }) => {
   return (

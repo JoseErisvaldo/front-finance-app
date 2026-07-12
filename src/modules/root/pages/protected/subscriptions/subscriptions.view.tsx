@@ -1,14 +1,14 @@
 import { Box } from "@mui/material";
-import { Products } from "../../../../../shared/cross-features/products/products";
+import { Subscriptions } from "../../../../../shared/cross-features/subscriptions/subscriptions";
 
-export const ProductsView = () => {
+export const SubscriptionsView = () => {
   return (
     <Box>
       <h3>Produtos</h3>
       <Box sx={{ mb: 2 }}>
         <p>Veja todos os produtos disponíveis abaixo.</p>
       </Box>
-      <Products />
+      <Subscriptions />
     </Box>
   );
 };
