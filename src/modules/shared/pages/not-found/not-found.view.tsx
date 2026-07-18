@@ -10,7 +10,7 @@ const NotFoundView: React.FC = () => {
       <Typography variant="h4" gutterBottom>
         Página não encontrada
       </Typography>
-      <Typography variant="body1" color="text.secondary" paragraph>
+      <Typography sx={{ variant: "body1", color: "text.secondary" }}>
         Desculpe, a página que você procura não existe ou foi removida.
       </Typography>
       <Button
