@@ -5,10 +5,10 @@ export const SubscriptionsView = () => {
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.5 }}>
-        Produtos
+        Assinaturas
       </Typography>
       <Typography color="text.secondary" sx={{ mb: 3 }}>
-        Veja todos os produtos disponiveis abaixo.
+        Veja todas as assinaturas disponíveis abaixo.
       </Typography>
       <Subscriptions />
     </Container>
