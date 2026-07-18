@@ -1,4 +1,4 @@
-export type { Auth, User } from "../schema/auth.schema";
+import type z from "zod";
 import {
   AuthSchema,
   type IdentitySchema,

@@ -36,7 +36,7 @@ export const UserSchema = z.object({
       providers: z.array(z.string()).optional(),
     })
     .optional(),
-  user_metadata: z.record(z.any()).optional(),
+  user_metadata: z.record(z.string(), z.any()).optional(),
   identities: z.array(IdentitySchema).optional(),
   created_at: z.string().optional(),
   updated_at: z.string().optional(),
