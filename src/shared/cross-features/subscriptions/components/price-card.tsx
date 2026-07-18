@@ -28,7 +28,7 @@ export const PriceCard = ({
         justifyContent: "space-between",
       }}
     >
-      <Stack spacing={{ xs: 0.5, sm: 1 }} alignItems="flex-start">
+      <Stack sx={{ gap: { xs: 0.5, sm: 1 }, alignItems: "flex-start" }}>
         {title && (
           <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>
             {title}
